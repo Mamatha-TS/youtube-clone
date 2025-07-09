@@ -7,7 +7,7 @@ import Video from './Pages/Video';
 import SearchResults from './Pages/SearchResults';
 import { ThemeProvider } from './Context/ThemeContext';
 import ScrollToTop from './utils/ScrollToTop' 
-
+import CategoryPage from './Pages/CategoryPage';
 const App = () => {
   const [sidebar, setSidebar] = useState(true); // App-wide sidebar toggle
 
@@ -19,8 +19,9 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home sidebar={sidebar} />} />
           <Route path="/video/:categoryId/:videoId" element={<Video sidebar={sidebar} />} />
+          <Route path="/category/:categoryId" element={<CategoryPage sidebar={sidebar} />} />
           <Route path="/search/:query" element={<SearchResults />} />
-        </Routes>
+       </Routes>
       </main>
     </ThemeProvider>
   );

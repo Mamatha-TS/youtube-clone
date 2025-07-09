@@ -1,8 +1,11 @@
+// src/Components/Sidebar.jsx
 import React from 'react';
 import { useTheme } from '../Context/ThemeContext';
+import { useNavigate } from 'react-router-dom';
 
-const Sidebar = ({ sidebar, category, setCategory }) => {
+const Sidebar = ({ sidebar, category }) => {
   const { theme } = useTheme();
+  const navigate = useNavigate();
 
   const staticCategories = [
     { id: 0, label: 'Home', icon: 'bi-house-door-fill' },
@@ -17,7 +20,7 @@ const Sidebar = ({ sidebar, category, setCategory }) => {
   ];
 
   return (
-    <aside
+    <div
       className={`p-2 ${theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}`}
       style={{
         width: sidebar ? '240px' : '60px',
@@ -25,29 +28,30 @@ const Sidebar = ({ sidebar, category, setCategory }) => {
         overflowY: 'auto',
         position: 'sticky',
         top: 0,
-        zIndex: 1020,
       }}
     >
-      {/* Main Categories */}
       {staticCategories.map((cat) => (
         <div
           key={cat.id}
-          className={`d-flex align-items-center mb-3 p-2 rounded ${category === cat.id
-            ? theme === 'dark' ? 'bg-secondary text-white' : 'bg-light text-dark'
-            : ''}`}
+          className={`d-flex align-items-center mb-3 p-2 rounded ${
+            category === cat.id
+              ? theme === 'dark'
+                ? 'bg-secondary text-white'
+                : 'bg-light text-dark'
+              : ''
+          }`}
           style={{ cursor: 'pointer' }}
-          onClick={() => setCategory(cat.id)}
+          onClick={() => navigate(cat.id === 0 ? '/' : `/category/${cat.id}`)}
         >
-          <i className={`bi ${cat.icon} me-2 fs-5 ${!sidebar ? 'mx-auto' : ''}`}></i>
+          <i className={`bi ${cat.icon} me-2 ${!sidebar ? 'mx-auto' : ''}`}></i>
           {sidebar && <span>{cat.label}</span>}
         </div>
       ))}
 
-      {/* Subscriptions */}
       {sidebar && (
         <>
           <hr />
-          <h6 className="text-uppercase text-muted small">Subscriptions</h6>
+          <h6>Subscriptions</h6>
           <div className="align-items-center mb-2">
             <div className="d-flex mb-2 align-items-center">
               <i className="bi bi-music-note me-3 fs-5"></i>
@@ -63,20 +67,20 @@ const Sidebar = ({ sidebar, category, setCategory }) => {
             </div>
           </div>
 
-          {/* Footer */}
           <hr />
           <p className={`small mt-4 p-2 ${theme === 'dark' ? 'text-light' : 'text-muted'}`}>
             About Press Copyright <br />
             Contact us Creators Advertise <br />
-            Developers <br /><br />
+            Developers <br />
+            <br />
             Terms Privacy Policy & Safety <br />
             How YouTube works <br />
             Test new features <br />
-            © 2025 Google LLC
+            @ 2025 MamathaTS
           </p>
         </>
       )}
-    </aside>
+    </div>
   );
 };
 
