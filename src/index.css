@@ -1,0 +1,106 @@
+/* index.css */
+
+/* THEME: Light */
+body.light {
+  background-color: #fff;
+  color: #000;
+}
+
+/* THEME: Dark */
+body.dark {
+  background-color: #0f0f0f;
+  color: #fff;
+}
+
+body.dark .card {
+  background-color: #1f1f1f;
+  color: #fff;
+}
+
+body.dark .navbar {
+  background-color: #181818 !important;
+  color: white;
+}
+
+body.dark .sidebar {
+  background-color: #181818 !important;
+  color: white;
+}
+
+body.dark .form-control,
+body.dark .btn {
+  background-color: #222 !important;
+  color: #fff !important;
+  border-color: #555 !important;
+}
+
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark h4,
+body.dark h5,
+body.dark h6,
+body.dark p,
+body.dark span,
+body.dark small,
+body.dark label {
+  color: #fff !important;
+}
+
+body.dark .video-page {
+  color: #fff;
+  background-color: #0f0f0f;
+}
+
+/* GENERAL */
+a {
+  text-decoration: none;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+/* THUMBNAIL */
+.thumbnail-wrapper {
+  overflow: hidden;
+  border-radius: 8px;
+}
+.thumbnail-wrapper img {
+  transition: transform 0.3s ease;
+}
+.thumbnail-wrapper:hover img {
+  transform: scale(1.05);
+}
+
+/* VIDEO CARD */
+.video-card {
+  transition: box-shadow 0.2s ease;
+}
+.video-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+/* INTERACTIONS */
+.react-button {
+  transition: transform 0.2s ease, color 0.2s;
+  cursor: pointer;
+}
+.react-button:active {
+  transform: scale(1.1);
+}
+.active-like {
+  color: #0d6efd; /* Bootstrap Primary */
+}
+.active-dislike {
+  color: #dc3545; /* Bootstrap Danger */
+}
