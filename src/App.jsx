@@ -21,6 +21,7 @@ const App = () => {
           <Route path="/video/:categoryId/:videoId" element={<Video sidebar={sidebar} />} />
           <Route path="/category/:categoryId" element={<CategoryPage sidebar={sidebar} />} />
           <Route path="/search/:query" element={<SearchResults />} />
+          <Route path="/search" element={<SearchResults />} />
        </Routes>
       </main>
     </ThemeProvider>
