@@ -1,4 +1,3 @@
-// src/Pages/SearchResults.jsx
 import React, { useEffect, useState } from 'react';
 import { API_KEY } from '../data';
 import { useParams, Link } from 'react-router-dom';
@@ -35,21 +34,27 @@ const SearchResults = () => {
         <p className={`text-${theme === 'dark' ? 'light' : 'muted'}`}>No results found.</p>
       ) : (
         results.map((item, idx) => {
-          const videoId = item.id.videoId;
+          const videoId = item.id?.videoId;
           const snippet = item.snippet;
+
+          if (!videoId || !snippet) return null;
 
           return (
             <Link
               to={`/video/${snippet.categoryId || 0}/${videoId}`}
               key={idx}
-              className={`text-decoration-none ${theme === 'dark' ? 'text-white' : 'text-dark'}`}
+              className="text-decoration-none"
             >
-              <div className="card mb-3 border-0">
+              <div
+                className={`card mb-3 border-0 ${
+                  theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'
+                }`}
+              >
                 <div className="row g-0">
                   <div className="col-md-4">
                     <img
-                      src={snippet.thumbnails.medium.url}
-                      className="img-fluid rounded-start"
+                      src={snippet.thumbnails?.medium?.url}
+                      className="img-fluid rounded-start w-100"
                       alt={snippet.title}
                     />
                   </div>
@@ -58,7 +63,7 @@ const SearchResults = () => {
                       <h5 className="card-title">{snippet.title}</h5>
                       <p className="card-text mb-1">{snippet.channelTitle}</p>
                       <p className="card-text">
-                        <small className="text-muted">
+                        <small className={theme === 'dark' ? 'text-light' : 'text-muted'}>
                           {moment(snippet.publishedAt).fromNow()}
                         </small>
                       </p>

@@ -1,4 +1,3 @@
-// src/Components/Sidebar.jsx
 import React from 'react';
 import { useTheme } from '../Context/ThemeContext';
 import { useNavigate } from 'react-router-dom';
@@ -21,38 +20,44 @@ const Sidebar = ({ sidebar, category }) => {
 
   return (
     <div
-      className={`p-2 ${theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}`}
+      className={`d-flex flex-column p-2 ${theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}`}
       style={{
         width: sidebar ? '240px' : '60px',
         height: '100vh',
         overflowY: 'auto',
         position: 'sticky',
         top: 0,
+        transition: 'width 0.3s',
       }}
     >
-      {staticCategories.map((cat) => (
-        <div
-          key={cat.id}
-          className={`d-flex align-items-center mb-3 p-2 rounded ${
-            category === cat.id
-              ? theme === 'dark'
-                ? 'bg-secondary text-white'
-                : 'bg-light text-dark'
-              : ''
-          }`}
-          style={{ cursor: 'pointer' }}
-          onClick={() => navigate(cat.id === 0 ? '/' : `/category/${cat.id}`)}
-        >
-          <i className={`bi ${cat.icon} me-2 ${!sidebar ? 'mx-auto' : ''}`}></i>
-          {sidebar && <span>{cat.label}</span>}
-        </div>
-      ))}
+      {/* Category Items */}
+      {staticCategories.map((cat) => {
+        const isActive = category === cat.id;
+        const isDark = theme === 'dark';
 
+        return (
+          <div
+            key={cat.id}
+            className={`d-flex align-items-center mb-2 px-2 py-2 rounded 
+              ${isActive ? (isDark ? 'bg-secondary' : 'bg-light') : ''}
+              ${!isActive ? 'hover-sidebar' : ''}
+              ${isDark ? 'text-white' : 'text-dark'}
+            `}
+            style={{ cursor: 'pointer', transition: 'background 0.2s' }}
+            onClick={() => navigate(cat.id === 0 ? '/' : `/category/${cat.id}`)}
+          >
+            <i className={`bi ${cat.icon} me-2 fs-5 ${!sidebar ? 'mx-auto' : ''}`}></i>
+            {sidebar && <span className="fw-medium">{cat.label}</span>}
+          </div>
+        );
+      })}
+
+      {/* Subscriptions (only when sidebar is expanded) */}
       {sidebar && (
         <>
           <hr />
-          <h6>Subscriptions</h6>
-          <div className="align-items-center mb-2">
+          <h6 className="px-2">Subscriptions</h6>
+          <div className="px-2">
             <div className="d-flex mb-2 align-items-center">
               <i className="bi bi-music-note me-3 fs-5"></i>
               <p className="mb-0">Anand Audio</p>

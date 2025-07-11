@@ -33,6 +33,12 @@ body.dark .btn {
   color: #fff !important;
   border-color: #555 !important;
 }
+.hover-sidebar:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.bg-dark .hover-sidebar:hover {
+  background-color: #495057;
+}
 
 body.dark h1,
 body.dark h2,
